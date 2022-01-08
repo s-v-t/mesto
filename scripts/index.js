@@ -15,3 +15,20 @@ function closePopupOnOverlayClick(event){
 popupOpenButton.addEventListener('click', togglePopup);
 popupCloseButton.addEventListener('click', togglePopup);
 popup.addEventListener('click', closePopupOnOverlayClick);
+
+
+let formElement = document.querySelector ('.popup__form');
+let nameInput = formElement.querySelector ('.popup__form-name-input');
+let jobInput = formElement.querySelector ('.popup__form-job-input');
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+
+    let profile_name = document.querySelector ('.profile__info-name');
+    let profile_job = document.querySelector ('.profile__info-about');
+
+    profile_name.textContent = nameInput.value;
+    profile_job.textContent = jobInput.value;
+}
+
+formElement.addEventListener('submit', formSubmitHandler); 
