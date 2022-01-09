@@ -1,0 +1,9 @@
+.elements__like-button {
+    border: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.elements__like-button:hover{
+    cursor: pointer;
+}

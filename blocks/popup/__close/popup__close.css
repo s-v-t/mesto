@@ -9,4 +9,18 @@
     width: 32px;
     height: 32px;
     cursor: pointer;
+    transition: .5s;
+}
+
+@media screen and (max-width: 555px){
+    .popup__close{
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: -36px;
+    }
+}
+.popup__close:hover{
+    opacity: 0.6;
+    cursor: pointer;
 }
