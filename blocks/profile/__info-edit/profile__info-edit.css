@@ -3,4 +3,5 @@
     flex-direction: row;
     margin: 0;
     align-items: flex-end;
+    max-width: 100%;
 }
