@@ -9,7 +9,7 @@ let profileJob = document.querySelector('.profile__info-about');
 
 function openpopup() {
     popup.classList.toggle('popup_opened');
-    if (popup.classList.contains ('popup_opened') === false){
+    if (popup.classList.contains ('popup_opened')){
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
     }
