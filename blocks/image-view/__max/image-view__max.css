@@ -1,0 +1,13 @@
+.image-view__max{
+    object-fit: cover;
+    max-width: 100%;
+    height: 540px;
+    display: block;
+    transition: .7s;
+}
+
+@media screen and (max-width: 500px){
+    .image-view__max{
+        height: 299px;
+    }
+} 

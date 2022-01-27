@@ -10,88 +10,47 @@
 
 <body>
     <div class="page">
-            <header class="header">
-                <img src="./images/Vector.svg" alt="Логотип проекта - надпись Mesto-Russia" class="header__logo">
-            </header>
-        
-            <main>
-                <section class="profile">
-                    <div class="profile__user">
-                        <img class="profile__avatar-image" src="./images/avatar__image.jpg" alt="Фотография пользователя">
-                         <div class="profile__info">
-                            <div class="profile__info-edit">
-                                <h1 class="profile__info-name">Жак-Ив Кусто</h1>
-                                <button class="profile__button-edit" type="button"><img class="profile__button-edit-img"
-                                        src="./images/Edit_button.svg" alt="Знак пера"></button>
-                            </div>
-                            <p class="profile__info-about">Исследователь океана</p>
-                        </div>
-                    </div>
-                    <button class="profile__button-add" type="button"><img class="profile__button-add-img"
-                            src="./images/Add_button.svg" alt="Знак плюс"></button>
-                </section>
+        <header class="header">
+            <img src="./images/Vector.svg" alt="Логотип проекта - надпись Mesto-Russia" class="header__logo">
+        </header>
 
-                <section class="elements">
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/kirill-pershin-1556355-unsplash.jpg"
-                            alt="Домбай">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Домбай</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
+        <main>
+            <section class="profile">
+                <div class="profile__user">
+                    <img class="profile__avatar-image" src="./images/avatar__image.jpg" alt="Фотография пользователя">
+                    <div class="profile__info">
+                        <div class="profile__info-edit">
+                            <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+                            <button class="profile__button-edit" type="button"><img class="profile__button-edit-img"
+                                    src="./images/Edit_button.svg" alt="Знак пера"></button>
                         </div>
+                        <p class="profile__info-about">Исследователь океана</p>
                     </div>
+                </div>
+                <button class="profile__button-add" type="button"><img class="profile__button-add-img"
+                        src="./images/Add_button.svg" alt="Знак плюс"></button>
+            </section>
 
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/kirill-pershin-1404681-unsplash.jpg"
-                            alt="Гора Эльбрус закат">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Гора Эльбрус</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
-                        </div>
-                    </div>
+            <section class="elements">
+            </section>
+        </main>
 
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/kuban.jpg"
-                            alt="Река Кубань вид с высокого берега">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Кубань</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
-                        </div>
-                    </div>
-
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/mezmay.jpg"
-                            alt="Водопад рядом с поселком Мезмай">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Мезмай</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
-                        </div>
-                    </div>
-
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/sochi.jpg"
-                            alt="Озеро с черными лебедями в нижней части сочинского дендрария">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Сочи</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
-                        </div>
-                    </div>
-
-                    <div class="elements__element">
-                        <img class="elements__element-photo" src="./images/kirill-pershin-1088404-unsplash.jpg"
-                            alt="Карачаево-Черкессия">
-                        <div class="elements__content">
-                            <h2 class="elements__element-title">Карачаево-Черкессия</h2>
-                            <button class="elements__like-button" type="button"><img src="./images/like.svg" alt="Сердце"></button>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <footer class="footer">
-                <p class="footer__copyright">© 2021 Светлана Тыртышная</p>
-            </footer>
+        <footer class="footer">
+            <p class="footer__copyright">© 2021 Светлана Тыртышная</p>
+        </footer>
     </div>
+
+    <template class="card-template">
+        <div class="elements__element">
+            <button class="elements__thash-button" type="button"><img src="./images/Trash_button.svg" alt=""></button>
+            <img class="elements__element-photo">
+            <div class="elements__content">
+                <h2 class="elements__element-title"></h2>
+                <button class="elements__like-button" type="button"><img src="./images/like.svg"
+                        class="elements__like-button-img" alt="Сердце"></button>
+            </div>
+        </div>
+    </template>
 
     <div class="popup">
         <div class="popup__container">
@@ -104,6 +63,28 @@
             </form>
         </div>
     </div>
+    <div class="popup-place">
+        <div class="popup-place__container">
+            <button class="popup-place__close" type="button"></button>
+            <form class="popup-place__form" name="form_profile-edit">
+                <h2 class="popup-place__title">Новое место</h2>
+                <input class="popup-place__form-input-style" id="title-place" type="text" name="place-title" value=""
+                    placeholder="Название">
+                <input class="popup-place__form-input-style" id="image-place-url" type="url" name="place-image-url"
+                    value="" placeholder="Ссылка на картинку">
+                <button class="popup-place__button-save" type="submit"> Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="image-view">
+        <figure class="image-view__container">
+            <button class="image-view__close" type="button"></button>
+            <img src="" alt="" class="image-view__max">
+            <figcaption class="image-view__caption"></figcaption>
+        </figure>
+    </div>
     <script src="./scripts/index.js"></script>
 </body>
+
 </html>

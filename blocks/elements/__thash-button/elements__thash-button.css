@@ -1,0 +1,15 @@
+.elements__thash-button{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    width: 18px;
+    height: 19px;
+}
+
+.elements__thash-button:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}

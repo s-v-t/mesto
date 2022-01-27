@@ -1,0 +1,26 @@
+.image-view__close{
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    padding: 0;
+    background: transparent url(../../../images/Close_Icon.svg);
+    background-size: cover;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+@media screen and (max-width: 700px){
+    .image-view__close{
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: -36px;
+    }
+}
+.image-view__close:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
