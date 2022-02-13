@@ -7,6 +7,7 @@ const nameInput = formElement.querySelector('#name');
 const jobInput = formElement.querySelector('#job');
 const profileName = document.querySelector('.profile__info-name');
 const profileJob = document.querySelector('.profile__info-about');
+const profileButtonSubmit = document.querySelector('#profile-button-save');
 //Popup редактирования карточки места
 const popupPlaceOpenButton = document.querySelector('.profile__button-add');
 const popupPlace = document.querySelector('.popup-place');
@@ -96,36 +97,30 @@ function prependNewCard(inCardDate) {
 
 initialCards.forEach(prependNewCard);
 
+//открытие попапа
 function openPopup(popUpActive) {
     popUpActive.classList.add('popup_active');
     document.addEventListener('keydown', closePressEsc);
+    if (popUpActive == popupProfile) {
+        nameInput.value = profileName.textContent;
+        jobInput.value = profileJob.textContent;
+    } else {
+        formPlaceElement.reset();
+    }
+    enableValidation(param);
 }
 
+//закрытие попапа
 function closePopup(popUpActive) {
     popUpActive.classList.remove('popup_active');
     document.removeEventListener('keydown', closePressEsc);
 }
 
-
 // Закрытие попапа при клике на оверлей
-function closePopupOnOverlayClick(event,popup){
+function closePopupOnOverlayClick(event, popup) {
     if (event.target === event.currentTarget) {
-        popup.classList.remove('popup_active');
+        closePopup(popup);
     }
-}
-//---------------------------------
-
-function openPopupProfile() {
-    openPopup(popupProfile);
-    if (popupProfile.classList.contains('popup_active')) {
-        nameInput.value = profileName.textContent;
-        jobInput.value = profileJob.textContent;
-    }
-}
-
-function openPopupPlace() {
-    openPopup(popupPlace);
-    formPlaceElement.reset();
 }
 
 function submitFormHandler(evt) {
@@ -148,21 +143,21 @@ function submitformPlace(evt) {
 // Закрытие окна при нажатии Esc
 function closePressEsc(evt) {
     const currentActivePopup = document.querySelector('.popup_active');
-    console.log (evt.key);
+    console.log(evt.key);
     if (evt.key == 'Escape') {
         closePopup(currentActivePopup);
     }
 }
 
-popupOpenButton.addEventListener('click', openPopupProfile);
+popupOpenButton.addEventListener('click', function () { openPopup(popupProfile) });
 popupCloseProfileButton.addEventListener('click', function () { closePopup(popupProfile) });
 formElement.addEventListener('submit', submitFormHandler);
 
-popupPlaceOpenButton.addEventListener('click', openPopupPlace);
+popupPlaceOpenButton.addEventListener('click', function () { openPopup(popupPlace) });
 popupPlaceCloseButton.addEventListener('click', function () { closePopup(popupPlace) });
 formPlaceElement.addEventListener('submit', submitformPlace);
 
 imageViewClose.addEventListener('click', function () { closePopup(imageView) });
 
-popupProfile.addEventListener('click', function(evt){closePopupOnOverlayClick(evt, popupProfile)});
-popupPlace.addEventListener('click', function(evt){closePopupOnOverlayClick(evt, popupPlace)});
+popupProfile.addEventListener('click', function (evt) { closePopupOnOverlayClick(evt, popupProfile) });
+popupPlace.addEventListener('click', function (evt) { closePopupOnOverlayClick(evt, popupPlace) });
