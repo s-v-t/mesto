@@ -23,6 +23,19 @@ function toggleButton(currentForm, { submitButtonSelector, inactiveButtonClass }
     }
 }
 
+// функция сброса ошибок валидации при закрытии попапа
+function resetErrorMessage (popUpActive, param){
+    const clearErrors = Array.from(popUpActive.querySelectorAll('.popup__error-message'));
+    clearErrors.forEach(currentError => {
+        currentError.classList.remove (param.errorVisibleClass);
+        currentError.textContent = '';
+    });
+    const clearInputs = Array.from(popUpActive.querySelectorAll(param.inputSelector));
+    clearInputs.forEach(currentInput => {
+        currentInput.classList.remove(param.errorInputClass);
+    })
+}
+
 // валидация инпутов
 function validateInput(currentForm, currentInput, { errorInputClass, errorVisibleClass }) {
     const errorMessage = currentForm.querySelector(`#${currentInput.id}-error`);

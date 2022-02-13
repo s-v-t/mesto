@@ -104,8 +104,6 @@ function openPopup(popUpActive) {
     if (popUpActive == popupProfile) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
-    } else {
-        formPlaceElement.reset();
     }
     enableValidation(param);
 }
@@ -114,6 +112,8 @@ function openPopup(popUpActive) {
 function closePopup(popUpActive) {
     popUpActive.classList.remove('popup_active');
     document.removeEventListener('keydown', closePressEsc);
+    popUpActive.querySelector('.popup__form').reset();
+    resetErrorMessage (popUpActive, param);
 }
 
 // Закрытие попапа при клике на оверлей
