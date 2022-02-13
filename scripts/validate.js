@@ -25,7 +25,7 @@ function toggleButton(currentForm, { submitButtonSelector, inactiveButtonClass }
 
 // функция сброса ошибок валидации при закрытии попапа
 function resetErrorMessage (popUpActive, param){
-    const clearErrors = Array.from(popUpActive.querySelectorAll('.popup__error-message'));
+    const clearErrors = Array.from(popUpActive.querySelectorAll(param.errorMessageSelector));
     clearErrors.forEach(currentError => {
         currentError.classList.remove (param.errorVisibleClass);
         currentError.textContent = '';
@@ -71,14 +71,6 @@ const param = {
     inactiveButtonClass: 'popup__button-save-disabled',
     errorInputClass: 'popup__input-type-error',
     errorVisibleClass: 'popup__error-visible',
+    errorMessageSelector: '.popup__error-message'
 }
-// enableValidation(param);
-
-// enableValidation({
-//     formSelector: '.popup__form',
-//     inputSelector: '.popup__form-input-style',
-//     submitButtonSelector: '.popup__button-save',
-//     inactiveButtonClass: 'popup__button-save-disabled',
-//     errorInputClass: 'popup__input-type-error',
-//     errorVisibleClass: 'popup__error-visible',
-// });
+enableValidation(param);

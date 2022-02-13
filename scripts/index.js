@@ -1,7 +1,6 @@
 //Popup редактирования профиля
 const popupOpenButton = document.querySelector('.profile__button-edit');
 const popupProfile = document.querySelector('.popup-profile');
-const popupCloseProfileButton = document.querySelector('.popup-profile__close');
 const formElement = popupProfile.querySelector('.popup-profile__form');
 const nameInput = formElement.querySelector('#name');
 const jobInput = formElement.querySelector('#job');
@@ -11,7 +10,6 @@ const profileButtonSubmit = document.querySelector('#profile-button-save');
 //Popup редактирования карточки места
 const popupPlaceOpenButton = document.querySelector('.profile__button-add');
 const popupPlace = document.querySelector('.popup-place');
-const popupPlaceCloseButton = document.querySelector('.popup-place__close');
 const formPlaceElement = document.querySelector('.popup-place__form');
 const placeTitleInput = formPlaceElement.querySelector('#title-place');
 const placeImageUrlInput = formPlaceElement.querySelector('#image-place-url');
@@ -19,7 +17,6 @@ const placeImageUrlInput = formPlaceElement.querySelector('#image-place-url');
 const imageView = document.querySelector('.image-view');
 const imageMax = document.querySelector('.image-view__max');
 const captionMax = document.querySelector('.image-view__caption');
-const imageViewClose = document.querySelector('.image-view__close');
 
 //Создание новых карточек
 const initialCards = [
@@ -101,27 +98,48 @@ initialCards.forEach(prependNewCard);
 function openPopup(popUpActive) {
     popUpActive.classList.add('popup_active');
     document.addEventListener('keydown', closePressEsc);
-    if (popUpActive == popupProfile) {
+}
+
+//открытие попапа профиля
+function openPopupProfile() {
+    resetErrorMessage (popupProfile, param);
+    openPopup(popupProfile);
+    if (popupProfile.classList.contains('popup_active')) {
         nameInput.value = profileName.textContent;
         jobInput.value = profileJob.textContent;
     }
-    enableValidation(param);
+    toggleButton(formElement, param);
+}
+
+//открытие попапа места
+function openPopupPlace() {
+    resetErrorMessage (popupPlace, param);
+    openPopup(popupPlace);
+    formPlaceElement.reset();
+    toggleButton(formPlaceElement, param);
 }
 
 //закрытие попапа
 function closePopup(popUpActive) {
     popUpActive.classList.remove('popup_active');
     document.removeEventListener('keydown', closePressEsc);
-    popUpActive.querySelector('.popup__form').reset();
-    resetErrorMessage (popUpActive, param);
 }
 
-// Закрытие попапа при клике на оверлей
-function closePopupOnOverlayClick(event, popup) {
-    if (event.target === event.currentTarget) {
-        closePopup(popup);
-    }
+//универсальная функция закрытия и закрытия по оверлею
+function closeAllpopup (){
+    const popups = document.querySelectorAll('.popup');
+    popups.forEach((selectPopup) =>{
+        selectPopup.addEventListener('click', (evt) => {
+            if (selectPopup.classList.contains('popup_active')){
+                if (evt.target === evt.currentTarget||evt.target.classList.contains('popup__close')){
+                    closePopup(selectPopup);
+                }
+            }
+            
+        });
+    });
 }
+closeAllpopup ();
 
 function submitFormHandler(evt) {
     evt.preventDefault();
@@ -142,22 +160,14 @@ function submitformPlace(evt) {
 
 // Закрытие окна при нажатии Esc
 function closePressEsc(evt) {
-    const currentActivePopup = document.querySelector('.popup_active');
-    console.log(evt.key);
     if (evt.key == 'Escape') {
+        const currentActivePopup = document.querySelector('.popup_active');
         closePopup(currentActivePopup);
     }
 }
 
-popupOpenButton.addEventListener('click', function () { openPopup(popupProfile) });
-popupCloseProfileButton.addEventListener('click', function () { closePopup(popupProfile) });
+popupOpenButton.addEventListener('click', openPopupProfile);
 formElement.addEventListener('submit', submitFormHandler);
 
-popupPlaceOpenButton.addEventListener('click', function () { openPopup(popupPlace) });
-popupPlaceCloseButton.addEventListener('click', function () { closePopup(popupPlace) });
+popupPlaceOpenButton.addEventListener('click', openPopupPlace);
 formPlaceElement.addEventListener('submit', submitformPlace);
-
-imageViewClose.addEventListener('click', function () { closePopup(imageView) });
-
-popupProfile.addEventListener('click', function (evt) { closePopupOnOverlayClick(evt, popupProfile) });
-popupPlace.addEventListener('click', function (evt) { closePopupOnOverlayClick(evt, popupPlace) });
