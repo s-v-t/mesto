@@ -98,11 +98,22 @@ initialCards.forEach(prependNewCard);
 
 function openPopup(popUpActive) {
     popUpActive.classList.add('popup_active');
+    document.addEventListener('keydown', closePressEsc);
 }
 
 function closePopup(popUpActive) {
     popUpActive.classList.remove('popup_active');
+    document.removeEventListener('keydown', closePressEsc);
 }
+
+
+// Закрытие попапа при клике на оверлей
+function closePopupOnOverlayClick(event,popup){
+    if (event.target === event.currentTarget) {
+        popup.classList.remove('popup_active');
+    }
+}
+//---------------------------------
 
 function openPopupProfile() {
     openPopup(popupProfile);
@@ -134,6 +145,15 @@ function submitformPlace(evt) {
     closePopup(popupPlace);
 }
 
+// Закрытие окна при нажатии Esc
+function closePressEsc(evt) {
+    const currentActivePopup = document.querySelector('.popup_active');
+    console.log (evt.key);
+    if (evt.key == 'Escape') {
+        closePopup(currentActivePopup);
+    }
+}
+
 popupOpenButton.addEventListener('click', openPopupProfile);
 popupCloseProfileButton.addEventListener('click', function () { closePopup(popupProfile) });
 formElement.addEventListener('submit', submitFormHandler);
@@ -143,3 +163,6 @@ popupPlaceCloseButton.addEventListener('click', function () { closePopup(popupPl
 formPlaceElement.addEventListener('submit', submitformPlace);
 
 imageViewClose.addEventListener('click', function () { closePopup(imageView) });
+
+popupProfile.addEventListener('click', function(evt){closePopupOnOverlayClick(evt, popupProfile)});
+popupPlace.addEventListener('click', function(evt){closePopupOnOverlayClick(evt, popupPlace)});

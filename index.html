@@ -55,11 +55,13 @@
     <div class="popup-profile popup">
         <div class="popup__container">
             <button class="popup-profile__close popup__close" type="button"></button>
-            <form class="popup-profile__form popup__form" name="form_profile-edit">
+            <form class="popup-profile__form popup__form" name="form_profile-edit" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__form-input-style" id="name" type="text" name="profile-name" value="">
-                <input class="popup__form-input-style" id="job" type="text" name="profile-job" value="">
-                <button class="popup__button-save" type="submit"> Сохранить</button>
+                <input class="popup__form-input-style" id="name" required minlength="2" maxlength="40" type="text" name="profile-name" value="">
+                <span class="popup__error-message" id="name-error"></span>
+                <input class="popup__form-input-style" id="job" required minlength="2" maxlength="200" type="text" name="profile-job" value="">
+                <span class="popup__error-message" id="job-error"></span>
+                <button class="popup__button-save" id="profile-button-save" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
@@ -67,13 +69,15 @@
     <div class="popup-place popup">
         <div class="popup__container">
             <button class="popup-place__close popup__close" type="button"></button>
-            <form class="popup-place__form popup__form" name="form_profile-edit">
+            <form class="popup-place__form popup__form" name="form_profile-edit" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__form-input-style" id="title-place" type="text" name="place-title" value=""
+                <input class="popup__form-input-style" id="title-place" required minlength="2" maxlength="30" type="text" name="place-title" value=""
                     placeholder="Название">
-                <input class="popup__form-input-style" id="image-place-url" type="url" name="place-image-url" value=""
+                    <span class="popup__error-message" id="title-place-error"></span>
+                <input class="popup__form-input-style" id="image-place-url" required type="url" name="place-image-url" value=""
                     placeholder="Ссылка на картинку">
-                <button class="popup__button-save" type="submit"> Сохранить</button>
+                    <span class="popup__error-message" id="image-place-url-error"></span>
+                <button class="popup__button-save" id="place-button-save" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
@@ -86,6 +90,7 @@
         </figure>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
