@@ -50,10 +50,8 @@ export function openPopup(popUpActive) {
 function openPopupProfile() {
     editFormValidator.resetErrorMessage();
     openPopup(popupProfile);
-    if (popupProfile.classList.contains('popup_active')) {
-        nameInput.value = profileName.textContent;
-        jobInput.value = profileJob.textContent;
-    }
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
     editFormValidator.toggleButton();
 }
 
@@ -76,10 +74,8 @@ function closeAllpopup() {
     const popups = document.querySelectorAll('.popup');
     popups.forEach((selectPopup) => {
         selectPopup.addEventListener('click', (evt) => {
-            if (selectPopup.classList.contains('popup_active')) {
-                if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
-                    closePopup(selectPopup);
-                }
+            if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
+                closePopup(selectPopup);
             }
         });
     });
@@ -99,7 +95,7 @@ function submitformPlace(evt) {
         name: placeTitleInput.value,
         link: placeImageUrlInput.value
     }, cardTemplateSelector);
-    
+
     const newCardElement = newElement.createCard();
 
     sectionEl.prepend(newCardElement);

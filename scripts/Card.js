@@ -10,12 +10,17 @@ import {
 
 export class Card {
     constructor(cardDate, cardTemplateSelector) {
-        this.cardTemplate = document.querySelector(cardTemplateSelector).content;
         this._cardDate = cardDate;
+        this._cardTemplateSelector = cardTemplateSelector;
     }
 
+    _getTemplate() {
+        const cardElement = document.querySelector(this._cardTemplateSelector).content.cloneNode(true);
+        return cardElement;
+      }
+
     createCard() {
-        this._cardElement = this.cardTemplate.cloneNode(true);
+        this._cardElement = this._getTemplate();
 
         const cardImage = this._cardElement.querySelector('.elements__element-photo');
         const cardTitle = this._cardElement.querySelector('.elements__element-title');
@@ -34,17 +39,11 @@ export class Card {
 
     _likePlace(evt) {
         const likeImgActive = evt.target.closest('.elements__like-button-img');
-        if (evt.target.closest('.elements__like-button').classList.contains('elements__like-button-active')) {
-            likeImgActive.src = "./images/like.svg";
-        } else {
-            likeImgActive.src = "./images/like_active.svg";
-        }
-        evt.target.closest('.elements__like-button').classList.toggle('elements__like-button-active');
+        evt.target.classList.toggle('elements__like-button-active');
     }
 
     _deleteCard(evt) {
         evt.target.closest('.elements__element').remove();
-        // this._cardElement.closest('.elements__element').remove();
     }
 
     _openImageView(evt) {
