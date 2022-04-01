@@ -5,113 +5,93 @@ import {
 import {
     param,
     initialCards,
-    sectionEl,
     cardTemplateSelector,
     popupOpenButton,
-    popupProfile,
     formProfileElement,
     nameInput,
     jobInput,
-    profileName,
-    profileJob,
-    profileButtonSubmit,
+    userNameSelector,
+    userAboutSelector,
     popupPlaceOpenButton,
-    popupPlace,
     formPlaceElement,
     placeTitleInput,
-    placeImageUrlInput
+    placeImageUrlInput,
+    popupProfileSelector,
+    popupPlaceSelector,
+    sectionSelector,
 } from './constants.js'
 
 import {
     Card
 } from './Card.js'
 
+import{
+    UserInfo
+} from './UserInfo.js'
+
+import {
+    Section 
+} from './Section.js'
+
+import { PopupWithForm } from './PopupWithForm.js'
+
+
+const newSection = new Section({
+    items: initialCards,
+    renderer: function(currentItem){
+        const newCard = new Card(currentItem, cardTemplateSelector);
+        const cardElement = newCard.createCard();
+        newSection.addItem(cardElement);
+    }
+}, sectionSelector);
+
+newSection.renderAllElement();
+
+const getUserDate = new UserInfo(userNameSelector, userAboutSelector);
 
 const editFormValidator = new FormValidator(param, formProfileElement);
 const addCardFormValidator = new FormValidator(param, formPlaceElement);
-
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-initialCards.forEach((inCardDate) => {
-    const newCard = new Card(inCardDate, cardTemplateSelector);
-    const cardElement = newCard.createCard();
-    sectionEl.prepend(cardElement);
 
-});
+const popupFormProfile = new PopupWithForm (popupProfileSelector, (evt)=>{
+    evt.preventDefault();
+    getUserDate.setUserInfo(nameInput.value, jobInput.value);
+    popupFormProfile.close();
+})
 
-//открытие попапа
-export function openPopup(popUpActive) {
-    popUpActive.classList.add('popup_active');
-    document.addEventListener('keydown', closePressEsc);
-}
+const popupFormPlace = new PopupWithForm (popupPlaceSelector, (evt)=>{
+    evt.preventDefault();
+    const newElement = new Card({
+                name: placeTitleInput.value,
+                link: placeImageUrlInput.value
+            }, cardTemplateSelector);
+        
+    const newCardElement = newElement.createCard();
+    newSection.addItem(newCardElement);
+    popupFormPlace.close();
+})
 
 //открытие попапа профиля
 function openPopupProfile() {
     editFormValidator.resetErrorMessage();
-    openPopup(popupProfile);
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+    popupFormProfile.open();
+    popupFormProfile.setEventListeners();
+    nameInput.value = getUserDate.getUserInfo().name;
+    jobInput.value = getUserDate.getUserInfo().about;
     editFormValidator.toggleButton();
 }
 
 //открытие попапа места
 function openPopupPlace() {
     addCardFormValidator.resetErrorMessage();
-    openPopup(popupPlace);
+    popupFormPlace.open();
+    popupFormPlace.setEventListeners();
     formPlaceElement.reset();
     addCardFormValidator.toggleButton();
 }
 
-//закрытие попапа
-function closePopup(popUpActive) {
-    popUpActive.classList.remove('popup_active');
-    document.removeEventListener('keydown', closePressEsc);
-}
-
-//универсальная функция закрытия и закрытия по оверлею
-function closeAllpopup() {
-    const popups = document.querySelectorAll('.popup');
-    popups.forEach((selectPopup) => {
-        selectPopup.addEventListener('click', (evt) => {
-            if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
-                closePopup(selectPopup);
-            }
-        });
-    });
-}
-closeAllpopup();
-
-function submitFormHandler(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(popupProfile);
-}
-
-function submitformPlace(evt) {
-    evt.preventDefault();
-    const newElement = new Card({
-        name: placeTitleInput.value,
-        link: placeImageUrlInput.value
-    }, cardTemplateSelector);
-
-    const newCardElement = newElement.createCard();
-
-    sectionEl.prepend(newCardElement);
-    closePopup(popupPlace);
-}
-
-// Закрытие окна при нажатии Esc
-function closePressEsc(evt) {
-    if (evt.key == 'Escape') {
-        const currentActivePopup = document.querySelector('.popup_active');
-        closePopup(currentActivePopup);
-    }
-}
-
 popupOpenButton.addEventListener('click', openPopupProfile);
-formProfileElement.addEventListener('submit', submitFormHandler);
 
 popupPlaceOpenButton.addEventListener('click', openPopupPlace);
-formPlaceElement.addEventListener('submit', submitformPlace);

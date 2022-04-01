@@ -37,9 +37,13 @@ export const initialCards = [
     }
 ];
 
-export const sectionEl = document.querySelector('.elements');
-
 export const cardTemplateSelector = '.card-template';
+export const popupProfileSelector = '.popup-profile';
+export const popupPlaceSelector = '.popup-place';
+export const imageViewSelector = '.image-view';
+export const sectionSelector = '.elements';
+export const userNameSelector = '.profile__info-name';
+export const userAboutSelector = '.profile__info-about';
 
 //Просмотр изображения
 export const imageView = document.querySelector('.image-view');
@@ -53,8 +57,6 @@ export const popupProfile = document.querySelector('.popup-profile');
 export const formProfileElement = popupProfile.querySelector('.popup-profile__form');
 export const nameInput = formProfileElement.querySelector('#name');
 export const jobInput = formProfileElement.querySelector('#job');
-export const profileName = document.querySelector('.profile__info-name');
-export const profileJob = document.querySelector('.profile__info-about');
 export const profileButtonSubmit = document.querySelector('#profile-button-save');
 
 //Popup редактирования карточки места

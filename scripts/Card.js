@@ -1,12 +1,5 @@
-import {
-    openPopup
-} from './index.js'
-import {
-    imageView,
-    imageMax,
-    captionMax
-} from './constants.js'
-
+import {PopupWithImage} from './PopupWithImage.js';
+import {imageViewSelector} from './constants.js';
 
 export class Card {
     constructor(cardDate, cardTemplateSelector) {
@@ -26,13 +19,14 @@ export class Card {
         const cardTitle = this._cardElement.querySelector('.elements__element-title');
         const deleteButton = this._cardElement.querySelector('.elements__thash-button');
         const likeButton = this._cardElement.querySelector('.elements__like-button');
+        const popupImageView = new PopupWithImage (imageViewSelector);
 
         cardTitle.textContent = this._cardDate.name;
         cardImage.src = this._cardDate.link;
         cardImage.alt = this._cardDate.name;
 
         deleteButton.addEventListener('click', this._deleteCard);
-        cardImage.addEventListener('click', this._openImageView);
+        cardImage.addEventListener('click', popupImageView.open);
         likeButton.addEventListener('click', this._likePlace);
         return this._cardElement;
     }
@@ -44,15 +38,5 @@ export class Card {
 
     _deleteCard(evt) {
         evt.target.closest('.elements__element').remove();
-    }
-
-    _openImageView(evt) {
-        const currentImage = evt.target.closest('.elements__element-photo');
-        const currentElement = evt.target.closest('.elements__element');
-        const currentCaption = currentElement.querySelector('.elements__element-title');
-        imageMax.src = currentImage.src;
-        imageMax.alt = currentImage.alt;
-        captionMax.textContent = currentCaption.textContent;
-        openPopup(imageView);
     }
 }
