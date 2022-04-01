@@ -1,10 +1,8 @@
-import {PopupWithImage} from './PopupWithImage.js';
-import {imageViewSelector} from './constants.js';
-
 export class Card {
-    constructor(cardDate, cardTemplateSelector) {
+    constructor(cardDate, cardTemplateSelector, handleCardClick) {
         this._cardDate = cardDate;
         this._cardTemplateSelector = cardTemplateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -19,14 +17,12 @@ export class Card {
         const cardTitle = this._cardElement.querySelector('.elements__element-title');
         const deleteButton = this._cardElement.querySelector('.elements__thash-button');
         const likeButton = this._cardElement.querySelector('.elements__like-button');
-        const popupImageView = new PopupWithImage (imageViewSelector);
-
         cardTitle.textContent = this._cardDate.name;
         cardImage.src = this._cardDate.link;
         cardImage.alt = this._cardDate.name;
 
         deleteButton.addEventListener('click', this._deleteCard);
-        cardImage.addEventListener('click', popupImageView.open);
+        cardImage.addEventListener('click', this._handleCardClick);
         likeButton.addEventListener('click', this._likePlace);
         return this._cardElement;
     }

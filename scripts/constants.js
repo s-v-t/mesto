@@ -46,22 +46,22 @@ export const userNameSelector = '.profile__info-name';
 export const userAboutSelector = '.profile__info-about';
 
 //Просмотр изображения
-export const imageView = document.querySelector('.image-view');
-export const imageMax = document.querySelector('.image-view__max');
-export const captionMax = document.querySelector('.image-view__caption');
+// export const imageView = document.querySelector('.image-view');
+// export const imageMax = document.querySelector('.image-view__max');
+// export const captionMax = document.querySelector('.image-view__caption');
 
 
 //Popup редактирования профиля
 export const popupOpenButton = document.querySelector('.profile__button-edit');
-export const popupProfile = document.querySelector('.popup-profile');
-export const formProfileElement = popupProfile.querySelector('.popup-profile__form');
+// export const popupProfile = document.querySelector('.popup-profile');
+export const formProfileElement = document.querySelector('.popup-profile__form');
 export const nameInput = formProfileElement.querySelector('#name');
 export const jobInput = formProfileElement.querySelector('#job');
 export const profileButtonSubmit = document.querySelector('#profile-button-save');
 
 //Popup редактирования карточки места
 export const popupPlaceOpenButton = document.querySelector('.profile__button-add');
-export const popupPlace = document.querySelector('.popup-place');
+// export const popupPlace = document.querySelector('.popup-place');
 export const formPlaceElement = document.querySelector('.popup-place__form');
 export const placeTitleInput = formPlaceElement.querySelector('#title-place');
 export const placeImageUrlInput = formPlaceElement.querySelector('#image-place-url');

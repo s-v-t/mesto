@@ -19,6 +19,7 @@ import {
     popupProfileSelector,
     popupPlaceSelector,
     sectionSelector,
+    imageViewSelector
 } from './constants.js'
 
 import {
@@ -35,11 +36,15 @@ import {
 
 import { PopupWithForm } from './PopupWithForm.js'
 
+import { PopupWithImage } from './PopupWithImage.js'
 
+const getUserDate = new UserInfo(userNameSelector, userAboutSelector);
+
+// отрисовка основных карточек мест
 const newSection = new Section({
     items: initialCards,
     renderer: function(currentItem){
-        const newCard = new Card(currentItem, cardTemplateSelector);
+        const newCard = new Card(currentItem, cardTemplateSelector, handleCardClick);
         const cardElement = newCard.createCard();
         newSection.addItem(cardElement);
     }
@@ -47,31 +52,39 @@ const newSection = new Section({
 
 newSection.renderAllElement();
 
-const getUserDate = new UserInfo(userNameSelector, userAboutSelector);
-
+//включение валидации форм
 const editFormValidator = new FormValidator(param, formProfileElement);
 const addCardFormValidator = new FormValidator(param, formPlaceElement);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-
+//создание объекта - попап формы профиля
 const popupFormProfile = new PopupWithForm (popupProfileSelector, (evt)=>{
     evt.preventDefault();
     getUserDate.setUserInfo(nameInput.value, jobInput.value);
     popupFormProfile.close();
 })
 
+//создание объекта - попап формы карточек мест
 const popupFormPlace = new PopupWithForm (popupPlaceSelector, (evt)=>{
     evt.preventDefault();
     const newElement = new Card({
                 name: placeTitleInput.value,
                 link: placeImageUrlInput.value
-            }, cardTemplateSelector);
+            }, cardTemplateSelector, handleCardClick);
         
     const newCardElement = newElement.createCard();
     newSection.addItem(newCardElement);
     popupFormPlace.close();
 })
+
+//создание объекта - попап просмотра изображения
+const maxImagePopup = new PopupWithImage(imageViewSelector);
+
+// открытие попапа с картинкой при клике на карточке
+function handleCardClick(evt){
+    maxImagePopup.open(evt);
+}
 
 //открытие попапа профиля
 function openPopupProfile() {
@@ -91,7 +104,6 @@ function openPopupPlace() {
     formPlaceElement.reset();
     addCardFormValidator.toggleButton();
 }
-
+//установка слушателей кнопкам открытия попапов
 popupOpenButton.addEventListener('click', openPopupProfile);
-
 popupPlaceOpenButton.addEventListener('click', openPopupPlace);

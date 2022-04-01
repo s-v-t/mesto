@@ -12,7 +12,6 @@ export class PopupWithForm extends Popup{
         this.Inputs.forEach((currentInputs) =>{
             arrInputValues[currentInputs.name] = currentInputs.value; 
         })
-        console.log (arrInputValues);
         return arrInputValues;
     }
 
