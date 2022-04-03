@@ -7,7 +7,7 @@ export class PopupWithForm extends Popup{
         this.Inputs = this.popupCurrentForm.querySelectorAll('.popup__form-input-style');
         this.submitCurrentForm = submitCurrentForm;
     }
-    getInputValues(){
+    _getInputValues(){
         const arrInputValues = {};
         this.Inputs.forEach((currentInputs) =>{
             arrInputValues[currentInputs.name] = currentInputs.value; 
