@@ -5,30 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto - Russia</title>
-    <link rel="stylesheet" href='./pages/index.css'>
+    <!-- <link rel="stylesheet" href='./pages/index.css'> -->
 </head>
 
 <body class="page">
 
     <header class="header">
-        <img src="./images/Vector.svg" alt="Логотип проекта - надпись Mesto-Russia" class="header__logo">
+        <img src="<%=require('./images/Vector.svg')%>" alt="Логотип проекта - надпись Mesto-Russia" class="header__logo">
     </header>
 
     <main>
         <section class="profile">
             <div class="profile__user">
-                <img class="profile__avatar-image" src="./images/avatar__image.jpg" alt="Фотография пользователя">
+                <img class="profile__avatar-image" src="<%=require('./images/avatar__image.jpg')%>" alt="Фотография пользователя">
                 <div class="profile__info">
                     <div class="profile__info-edit">
                         <h1 class="profile__info-name">Жак-Ив Кусто</h1>
                         <button class="profile__button-edit" type="button"><img class="profile__button-edit-img"
-                                src="./images/Edit_button.svg" alt="Знак пера"></button>
+                                src="<%=require('./images/Edit_button.svg')%>" alt="Знак пера"></button>
                     </div>
                     <p class="profile__info-about">Исследователь океана</p>
                 </div>
             </div>
             <button class="profile__button-add" type="button"><img class="profile__button-add-img"
-                    src="./images/Add_button.svg" alt="Знак плюс"></button>
+                    src="<%=require('./images/Add_button.svg')%>" alt="Знак плюс"></button>
         </section>
 
         <section class="elements">
@@ -42,7 +42,7 @@
 
     <template class="card-template">
         <div class="elements__element">
-            <button class="elements__thash-button" type="button"><img src="./images/Trash_button.svg" alt=""></button>
+            <button class="elements__thash-button" type="button"><img src="<%=require('./images/Trash_button.svg')%>" alt=""></button>
             <img class="elements__element-photo" src="#" alt="">
             <div class="elements__content">
                 <h2 class="elements__element-title"></h2>
@@ -90,7 +90,7 @@
             <figcaption class="image-view__caption"></figcaption>
         </figure>
     </div>
-    <script type="module" src="./scripts/index.js"></script>
+    <!-- <script type="module" src="./scripts/index.js"></script> -->
 </body>
 
 </html>

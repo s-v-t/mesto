@@ -10,6 +10,11 @@ export const param = {
 
 
 //Создание новых карточек
+
+import mezmayImg from '../images/mezmay.jpg'
+import kubanImg from '../images/kuban.jpg'
+import sochiImg from '../images/sochi.jpg'
+
 export const initialCards = [
     {
         name: 'Архыз',
@@ -21,11 +26,11 @@ export const initialCards = [
     },
     {
         name: 'Мезмай',
-        link: './images/mezmay.jpg'
+        link: mezmayImg
     },
     {
         name: 'Кубань',
-        link: './images/kuban.jpg'
+        link: kubanImg
     },
     {
         name: 'Байкал',
@@ -33,7 +38,7 @@ export const initialCards = [
     },
     {
         name: 'Сочи',
-        link: './images/sochi.jpg'
+        link: sochiImg
     }
 ];
 
