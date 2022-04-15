@@ -2,6 +2,7 @@ export class FormValidator {
     constructor(settings, form) {
         this._form = form;
         this._settings = settings;
+        this.currentButtonSubmit = this._form.querySelector(this._settings.submitButtonSelector);
     }
 
     //функции включения и отключения ошибки
@@ -33,14 +34,14 @@ export class FormValidator {
             inactiveButtonClass
         } = this._settings;
 
-        const currentButtonSubmit = this._form.querySelector(submitButtonSelector);
+        // const currentButtonSubmit = this._form.querySelector(submitButtonSelector);
         const formValid = this._form.checkValidity();
         if (formValid) {
-            currentButtonSubmit.classList.remove(inactiveButtonClass);
-            currentButtonSubmit.removeAttribute('disabled');
+            this.currentButtonSubmit.classList.remove(inactiveButtonClass);
+            this.currentButtonSubmit.removeAttribute('disabled');
         } else {
-            currentButtonSubmit.classList.add(inactiveButtonClass);
-            currentButtonSubmit.setAttribute('disabled', 'disabled');
+            this.currentButtonSubmit.classList.add(inactiveButtonClass);
+            this.currentButtonSubmit.setAttribute('disabled', 'disabled');
         }
     }
 

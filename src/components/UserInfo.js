@@ -9,11 +9,13 @@ export class UserInfo{
             name: this.userName.textContent,
             about: this.userAbout.textContent
         }
+        console.log('возвращаю');
+        console.log(userDate);
         return userDate;
     }
 
-    setUserInfo(newName, newAbout){
-        this.userName.textContent = newName;
-        this.userAbout.textContent = newAbout;
+    setUserInfo(inputsValue){
+        this.userName.textContent = inputsValue.name;
+        this.userAbout.textContent = inputsValue.job;
     }
 }

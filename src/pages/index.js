@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import {
     FormValidator
-} from './FormValidator.js'
+} from '../components/FormValidator.js'
 
 import {
     param,
@@ -22,32 +22,38 @@ import {
     popupPlaceSelector,
     sectionSelector,
     imageViewSelector
-} from './constants.js'
+} from '../utils/constants.js'
 
 import {
     Card
-} from './Card.js'
+} from '../components/Card.js'
 
 import{
     UserInfo
-} from './UserInfo.js'
+} from '../components/UserInfo.js'
 
 import {
     Section 
-} from './Section.js'
+} from '../components/Section.js'
 
-import { PopupWithForm } from './PopupWithForm.js'
+import { PopupWithForm } from '../components/PopupWithForm.js'
 
-import { PopupWithImage } from './PopupWithImage.js'
+import { PopupWithImage } from '../components/PopupWithImage.js'
 
-const getUserDate = new UserInfo(userNameSelector, userAboutSelector);
+const userDate = new UserInfo(userNameSelector, userAboutSelector);
+
+//функция создания новой карточки
+function createNewCard(currentItem, cardTemplateSelector, handleCardClick){
+    const newCard = new Card(currentItem, cardTemplateSelector, handleCardClick);
+    const cardElement = newCard.createCard();
+    return cardElement
+}
 
 // отрисовка основных карточек мест
 const newSection = new Section({
     items: initialCards,
     renderer: function(currentItem){
-        const newCard = new Card(currentItem, cardTemplateSelector, handleCardClick);
-        const cardElement = newCard.createCard();
+        const cardElement = createNewCard(currentItem, cardTemplateSelector, handleCardClick);
         newSection.addItem(cardElement);
     }
 }, sectionSelector);
@@ -61,50 +67,51 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 //создание объекта - попап формы профиля
-const popupFormProfile = new PopupWithForm (popupProfileSelector, (evt)=>{
-    evt.preventDefault();
-    getUserDate.setUserInfo(nameInput.value, jobInput.value);
+const popupFormProfile = new PopupWithForm (popupProfileSelector, (inputsValue)=>{
+    userDate.setUserInfo(inputsValue);
     popupFormProfile.close();
 })
+popupFormProfile.setEventListeners();
 
 //создание объекта - попап формы карточек мест
-const popupFormPlace = new PopupWithForm (popupPlaceSelector, (evt)=>{
-    evt.preventDefault();
-    const newElement = new Card({
-                name: placeTitleInput.value,
-                link: placeImageUrlInput.value
-            }, cardTemplateSelector, handleCardClick);
-        
-    const newCardElement = newElement.createCard();
+const popupFormPlace = new PopupWithForm (popupPlaceSelector, (inputsValue)=>{
+    const newCardElement = createNewCard({
+        name: inputsValue.titlePlace,
+        link: inputsValue.imagePlaceUrl
+    }, cardTemplateSelector, handleCardClick);
+
     newSection.addItem(newCardElement);
     popupFormPlace.close();
 })
+popupFormPlace.setEventListeners();
+
 
 //создание объекта - попап просмотра изображения
 const maxImagePopup = new PopupWithImage(imageViewSelector);
+maxImagePopup.setEventListeners();
 
 // открытие попапа с картинкой при клике на карточке
-function handleCardClick(evt){
-    maxImagePopup.open(evt);
+function handleCardClick(imageSrc, imageTitle){
+    maxImagePopup.open(imageSrc, imageTitle);
 }
 
 //открытие попапа профиля
 function openPopupProfile() {
     editFormValidator.resetErrorMessage();
-    popupFormProfile.open();
-    popupFormProfile.setEventListeners();
-    nameInput.value = getUserDate.getUserInfo().name;
-    jobInput.value = getUserDate.getUserInfo().about;
+    const userNewDate = userDate.getUserInfo();
+    console.log (`${userNewDate} открытие попапа`);
+    nameInput.value = userNewDate.name;
+    jobInput.value = userNewDate.about;
     editFormValidator.toggleButton();
+    popupFormProfile.open();
 }
 
 //открытие попапа места
 function openPopupPlace() {
     addCardFormValidator.resetErrorMessage();
-    popupFormPlace.open();
-    popupFormPlace.setEventListeners();
     formPlaceElement.reset();
     addCardFormValidator.toggleButton();
+    popupFormPlace.open();
 }
 //установка слушателей кнопкам открытия попапов
 popupOpenButton.addEventListener('click', openPopupProfile);

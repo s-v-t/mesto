@@ -22,7 +22,7 @@ export class Card {
         cardImage.alt = this._cardDate.name;
 
         deleteButton.addEventListener('click', this._deleteCard);
-        cardImage.addEventListener('click', this._handleCardClick);
+        cardImage.addEventListener('click', ()=>{this._handleCardClick(cardImage.src, cardTitle.textContent);});
         likeButton.addEventListener('click', this._likePlace);
         return this._cardElement;
     }
