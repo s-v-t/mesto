@@ -99,7 +99,6 @@ function handleCardClick(imageSrc, imageTitle){
 function openPopupProfile() {
     editFormValidator.resetErrorMessage();
     const userNewDate = userDate.getUserInfo();
-    console.log (`${userNewDate} открытие попапа`);
     nameInput.value = userNewDate.name;
     jobInput.value = userNewDate.about;
     editFormValidator.toggleButton();

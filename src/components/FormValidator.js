@@ -76,24 +76,9 @@ export class FormValidator {
 
     // функция сброса ошибок валидации при закрытии попапа - ПРОВЕРИТЬ
     resetErrorMessage() {
-        const {
-            errorMessageSelector,
-            errorVisibleClass,
-            inputSelector,
-            errorInputClass
-        } = this._settings;
-
-        const clearErrors = Array.from(this._form.querySelectorAll(errorMessageSelector));
-
-        clearErrors.forEach(currentError => {
-            currentError.classList.remove(errorVisibleClass);
-            currentError.textContent = '';
-        });
-
-        const clearInputs = Array.from(this._form.querySelectorAll(inputSelector));
-
-        clearInputs.forEach(currentInput => {
-            currentInput.classList.remove(errorInputClass);
-        })
+        this._inputList.forEach((inputElement) => {
+            const errorMessage = this._form.querySelector(`#${inputElement.id}-error`); 
+            this._offError(inputElement, errorMessage) ; 
+         }) 
     }
 }
