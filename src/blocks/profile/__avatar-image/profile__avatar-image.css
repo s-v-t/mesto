@@ -1,4 +1,10 @@
 .profile__avatar-image{
     max-width: 120px;
     border-radius: 50%;
+    transition: .5s;
+}
+
+.profile__avatar-image:hover{
+    cursor: url(../../../images/Avatar_Edit_Icon.png), pointer;
+    opacity: 0.2;
 }

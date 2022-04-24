@@ -49,12 +49,15 @@ export const imageViewSelector = '.image-view';
 export const sectionSelector = '.elements';
 export const userNameSelector = '.profile__info-name';
 export const userAboutSelector = '.profile__info-about';
+export const popupConfirmSelector = '.popup-confirm';
+export const popupAvatarSelector = '.popup-avatar-change';
+export const avatarImgSelector = '.profile__avatar-image';
 
 //Popup редактирования профиля
 export const popupOpenButton = document.querySelector('.profile__button-edit');
 export const formProfileElement = document.querySelector('.popup-profile__form');
 export const nameInput = formProfileElement.querySelector('#name');
-export const jobInput = formProfileElement.querySelector('#job');
+export const jobInput = formProfileElement.querySelector('#about');
 export const profileButtonSubmit = document.querySelector('#profile-button-save');
 
 //Popup редактирования карточки места
@@ -62,3 +65,6 @@ export const popupPlaceOpenButton = document.querySelector('.profile__button-add
 export const formPlaceElement = document.querySelector('.popup-place__form');
 export const placeTitleInput = formPlaceElement.querySelector('#titlePlace');
 export const placeImageUrlInput = formPlaceElement.querySelector('#imagePlaceUrl');
+
+export const avatarOpenPopup = document.querySelector('.profile__avatar-image');
+export const avatarFormElement = document.querySelector('.popup-avatar-form');
