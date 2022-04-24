@@ -1,7 +1,6 @@
 export class Section{
-    constructor({items, renderer}, sectionSelector){
+    constructor({renderer}, sectionSelector){
         this.sectionEl = document.querySelector(sectionSelector);
-        this.items = items;
         this.renderer = renderer;
     }
 
@@ -9,8 +8,8 @@ export class Section{
         this.sectionEl.prepend(addedElement);
     }
 
-    renderAllElement(){
-        this.items.forEach((currentItem) =>{
+    renderAllElement(itemsDate){
+        itemsDate.forEach((currentItem) =>{
             this.renderer(currentItem);
         })
     }

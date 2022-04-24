@@ -52,3 +52,5 @@
 
 @import url(../blocks/popup/__container-avatar/popup__container-avatar.css);
 @import url(../blocks/popup/__container-confirmPopup/popup__container-confirmPopup.css);
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
+@import url(../blocks/profile/__avatar-overlay/profile__avatar-overlay.css);

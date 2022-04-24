@@ -1,12 +1,12 @@
 export class Card {
-    constructor(cardDate, cardTemplateSelector, handleCardClick, openPopupConfirm, handleLikeClick) {
+    constructor(cardDate, userId, cardTemplateSelector, handleCardClick, openPopupConfirm, handleLikeClick) {
         this._cardDate = cardDate;
-        this._id = cardDate.id;
+        this._id = cardDate._id;
         this._cardTemplateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardClick;
         this._openPopupConfirm = openPopupConfirm;
-        this._userId = cardDate.userId;
-        this._ownerId = cardDate.ownerId;
+        this._userId = userId;
+        this._ownerId = cardDate.owner._id;
         this._handleLikeClick = handleLikeClick;
         this._likes = cardDate.likes
     }

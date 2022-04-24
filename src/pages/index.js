@@ -52,40 +52,26 @@ import {
 
 let userId;
 
-
 // отрисовка основных карточек мест
 const newSection = new Section({
-    items: [],
     renderer: function (currentItem) {
-        const cardElement = createNewCard(currentItem, cardTemplateSelector, handleCardClick, openPopupConfirm);
+        const cardElement = createNewCard(currentItem);
         newSection.addItem(cardElement);
     }
 }, sectionSelector);
 
-newSection.renderAllElement();
+// newSection.renderAllElement();
 
+Promise.all([api.getProfile(), api.getInitialCards()])
+.then(([resProfile, resCardDate]) => {
+    userDate.setUserInfo(resProfile);
+    userDate.setAvatar(resProfile);
+    userId = resProfile._id;
 
-api.getProfile()
-    .then(res => {
-        userDate.setUserInfo(res);
-        userDate.setAvatar(res);
-        userId = res._id;
-    })
-
-api.getInitialCards()
-    .then(res => {
-        res.forEach(cardData => {
-            const newCardfromApi = createNewCard({
-                name: cardData.name,
-                link: cardData.link,
-                likes: cardData.likes,
-                id: cardData._id,
-                userId: userId,
-                ownerId: cardData.owner._id
-            });
-            newSection.addItem(newCardfromApi);
-        })
-    })
+    newSection.renderAllElement(resCardDate);
+})
+.catch((error) => {
+    console.log(error);})
 
 const userDate = new UserInfo(userNameSelector, userAboutSelector, avatarImgSelector);
 
@@ -94,16 +80,22 @@ const popupConfirm = new PopupWithForm(popupConfirmSelector);
 
 popupConfirm.setEventListeners();
 
+//открытие попапа Подтверждения удаления
+function openPopupConfirm(){
+    popupConfirm.open();
+}
+
 //функция создания новой карточки
 function createNewCard(currentItem) {
     const newCard = new Card(
-        currentItem,
+        currentItem, 
+        userId,
         cardTemplateSelector,
         handleCardClick,
         () => {
             popupConfirm.open();
             popupConfirm.changeSubmit(() => {
-                api.deleteCard(currentItem.id)
+                api.deleteCard(currentItem._id)
                     .then(res => {
                         console.log(res);
                         newCard.deleteCard();
@@ -121,15 +113,18 @@ function createNewCard(currentItem) {
                         console.log(res);
                         newCard.setLikes(res.likes);
                     })
+                    .catch((error) => {
+                        console.log(error);})
             } else {
                 api.addLike(id)
                     .then(res => {
                         console.log(res);
                         newCard.setLikes(res.likes);
                     })
+                    .catch((error) => {
+                        console.log(error);})
             };
         }
-
     );
     const cardElement = newCard.createCard();
     return cardElement

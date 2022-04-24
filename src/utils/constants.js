@@ -66,5 +66,5 @@ export const formPlaceElement = document.querySelector('.popup-place__form');
 export const placeTitleInput = formPlaceElement.querySelector('#titlePlace');
 export const placeImageUrlInput = formPlaceElement.querySelector('#imagePlaceUrl');
 
-export const avatarOpenPopup = document.querySelector('.profile__avatar-image');
+export const avatarOpenPopup = document.querySelector('.profile__avatar-overlay');
 export const avatarFormElement = document.querySelector('.popup-avatar-form');

@@ -1,10 +1,6 @@
 .profile__avatar-image{
-    max-width: 120px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    transition: .5s;
-}
-
-.profile__avatar-image:hover{
-    cursor: url(../../../images/Avatar_Edit_Icon.png), pointer;
-    opacity: 0.2;
+    object-fit: cover;
 }
